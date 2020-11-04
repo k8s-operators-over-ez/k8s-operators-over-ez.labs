@@ -1,0 +1,4 @@
+domain: mydomain.com
+layout: ansible.sdk.operatorframework.io/v1
+projectName: ansible-operator-overeasy
+version: 3-alpha
