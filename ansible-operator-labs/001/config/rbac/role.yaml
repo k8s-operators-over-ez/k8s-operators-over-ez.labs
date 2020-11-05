@@ -37,4 +37,21 @@ rules:
       - patch
       - update
       - watch
+  ##
+  ## Rules for ansible-operators-over-ez.mydomain.com/v1alpha1, Kind: AnsibleOpsOverEasy
+  ##
+  - apiGroups:
+      - ansible-operators-over-ez.mydomain.com
+    resources:
+      - ansibleopsovereasies
+      - ansibleopsovereasies/status
+      - ansibleopsovereasies/finalizers
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
 # +kubebuilder:scaffold:rules

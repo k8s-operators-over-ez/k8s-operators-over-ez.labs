@@ -1,4 +1,8 @@
 domain: mydomain.com
 layout: ansible.sdk.operatorframework.io/v1
 projectName: ansible-operator-overeasy
+resources:
+- group: ansible-operators-over-ez
+  kind: AnsibleOpsOverEasy
+  version: v1alpha1
 version: 3-alpha

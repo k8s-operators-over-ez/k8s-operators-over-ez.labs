@@ -1,0 +1,20 @@
+# permissions for end users to view ansibleopsovereasies.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: ansibleopsovereasy-viewer-role
+rules:
+- apiGroups:
+  - ansible-operators-over-ez.mydomain.com
+  resources:
+  - ansibleopsovereasies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ansible-operators-over-ez.mydomain.com
+  resources:
+  - ansibleopsovereasies/status
+  verbs:
+  - get
