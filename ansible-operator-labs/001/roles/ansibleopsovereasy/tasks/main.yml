@@ -1,2 +1,95 @@
 ---
-# tasks file for AnsibleOpsOverEasy
+  # tasks file for AnsibleOpsOverEasy
+- name: set up operator reconciliation environment
+  set_fact: 
+    ansible_operator_meta: 
+      namespace: ansible-operator-overeasy-system
+  when: ansible_operator_meta.namespace is undefined
+
+- name: call api for response (if message and/or timeout is not defined)
+  shell:  'curl -sb -H "Accept: application/json" "http://my-json-server.typicode.com/keunlee/test-rest-repo/golang-lab00-response"'
+  register: response_fact
+  when: (message is undefined) or (timeout is undefined)
+
+- name: get response
+  set_fact: 
+    response: '{{response_fact.stdout}}'
+  when: (message is undefined) or (timeout is undefined)
+
+- name: set operator specifications on valid response
+  set_fact:
+    message: '{{response.message}}'
+    timeout: '{{response.timeout}}'
+  when: response is defined
+
+- name: deploy artifact(s)
+  community.kubernetes.k8s:
+    definition:
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        namespace: '{{ ansible_operator_meta.namespace }}'
+        creationTimestamp: null
+        labels:
+          run: busybox
+        name: busybox
+      spec:
+        containers:
+        - args:
+          - /bin/sh
+          - -c
+          - sleep {{timeout}}; echo "{{message}}"
+          image: busybox
+          name: busybox
+          resources: {}
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+      status: {}
+
+- name: Fetch a specific pod by name
+  community.kubernetes.k8s_info:
+    api_version: v1
+    kind: Pod
+    name: busybox
+    namespace: "{{ansible_operator_meta.namespace}}"
+  register: pod
+  until: pod.resources[0].status.phase == "Pending"
+
+- debug: 
+    var: pod.resources[0]  
+
+- name: Fetch a specific pod by name
+  community.kubernetes.k8s_info:
+    api_version: v1
+    kind: Pod
+    name: busybox
+    namespace: "{{ansible_operator_meta.namespace}}"
+  register: pod
+  until: pod.resources[0].status.phase == "Running"
+
+- debug: 
+    var: pod.resources[0]  
+
+- name: Fetch a specific pod by name
+  community.kubernetes.k8s_info:
+    api_version: v1
+    kind: Pod
+    name: busybox
+    namespace: "{{ansible_operator_meta.namespace}}"
+  register: pod
+  until: pod.resources[0].status.phase == "Succeeded"
+  delay: "{{timeout}}"
+
+- debug: 
+    var: pod.resources[0]  
+
+- name: update operator status
+  operator_sdk.util.k8s_status:
+    api_version: ansible-operators-over-ez.mydomain.com/v1alpha1
+    kind: AnsibleOpsOverEasy
+    name: "{{ ansible_operator_meta.name }}"
+    namespace: "{{ ansible_operator_meta.namespace }}"
+    status: 
+      expired: true
+      logged: true
+  when: ansible_operator_meta.name is defined

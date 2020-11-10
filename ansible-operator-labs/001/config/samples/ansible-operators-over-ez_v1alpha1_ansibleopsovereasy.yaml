@@ -2,5 +2,6 @@ apiVersion: ansible-operators-over-ez.mydomain.com/v1alpha1
 kind: AnsibleOpsOverEasy
 metadata:
   name: ansibleopsovereasy-sample
-spec:
-  foo: bar
+# spec:
+#   message: "may democracy prevail"
+#   timeout: 2

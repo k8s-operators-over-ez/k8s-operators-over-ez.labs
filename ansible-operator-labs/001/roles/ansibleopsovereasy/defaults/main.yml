@@ -1,2 +1,4 @@
 ---
 # defaults file for AnsibleOpsOverEasy
+# message: "test message"
+# timeout: 3

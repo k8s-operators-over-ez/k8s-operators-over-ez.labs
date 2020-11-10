@@ -3,5 +3,6 @@
 - version: v1alpha1
   group: ansible-operators-over-ez.mydomain.com
   kind: AnsibleOpsOverEasy
-  role: ansibleopsovereasy
+  role: ansibleopsovereasy 
+  # manageStatus: false
 # +kubebuilder:scaffold:watch
