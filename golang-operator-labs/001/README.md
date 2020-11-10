@@ -41,8 +41,7 @@ make run ENABLE_WEBHOOKS=false
 ```bash
 export IMG=quay.io/<username>/overeasy-operator:1.0.1
 
-make docker-build 
-make docker-push
+make docker-build docker-push
 ```
 
 **Deploy the Operator**
