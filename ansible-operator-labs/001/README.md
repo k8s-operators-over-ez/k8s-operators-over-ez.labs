@@ -1,10 +1,8 @@
 # Pre-requisites
 
 - Install [operator sdk](https://sdk.operatorframework.io/docs/installation/install-operator-sdk/)
-
 - Install [ansible operator dependencies](https://sdk.operatorframework.io/docs/building-operators/ansible/installation/)
-
-- make - build uitlity
+- Install `make` - build uitlity
 
 # Quickstart
 
@@ -15,18 +13,18 @@
 - Create a repository
     - repository: `ansible-overeasy-operator`
     - make repository `public`
-    - repository url: `quay.io/username/ansible-overeasy-operator`
+    - repository url: `quay.io/<username>/ansible-overeasy-operator`
 
 ## Deploy Operator
 
 ```bash
-make docker-build docker-push IMG=quay.io/kelee/ansible-overeasy-operator:1.0.1
+make docker-build docker-push IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
 
- export IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
+export IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
 
- make install
+make install
 
- make deploy
+make deploy
 ```
 
 At this point to see if your operator is installed switch your kubernetes namespace to: `ansible-operator-overeasy-system`
