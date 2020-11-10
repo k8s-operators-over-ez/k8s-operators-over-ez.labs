@@ -15,15 +15,37 @@
     - make repository `public`
     - repository url: `quay.io/<username>/ansible-overeasy-operator`
 
-## Deploy Operator
+## Login into Quay.io through docker
 
 ```bash
-make docker-build docker-push IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
+ docker login -u <your-quay-username> quay.io
+```
 
+## Register the Operator CRD 
+
+```bash
+make install
+```
+
+## (Option 1) Run locally outside the cluster
+
+```bash
+make run
+```
+
+## (Option 2) Run as a Deployment inside the cluster
+
+**Build and Push Image**
+
+```bash
 export IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
 
-make install
+make docker-build docker-push IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
+```
 
+**Deploy the Operator**
+
+```bash
 make deploy
 ```
 
@@ -48,7 +70,6 @@ deployment.apps/ansible-operator-overeasy-controller-manager   1/1     1        
 
 NAME                                                                      DESIRED   CURRENT   READY   AGE
 replicaset.apps/ansible-operator-overeasy-controller-manager-5dd865759c   1         1         1       15h
-
 ```
 
 ## Create Operator CR Instance
@@ -64,3 +85,8 @@ oc create -f config/samples/ansible-operators-over-ez_v1alpha1_ansibleopsovereas
 - [ ] - The busybox pod will complete after a duration
 - [ ] - After the busybox pod completes, the CR will have a `timeout` and `logged` flag set to `true`
 
+## Undeploy the Operator
+
+```bash
+make undeploy
+```

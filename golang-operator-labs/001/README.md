@@ -12,9 +12,15 @@
 - Goto: http://quay.io
     - create an account if you don't already have one
 - Create a repository
-    - repository: `golang-overeasy-operator`
+    - repository: `overeasy-operator`
     - make repository `public`
-    - repository url: `quay.io/<username>/golang-overeasy-operator`
+    - repository url: `quay.io/<username>/overeasy-operator`
+
+## Login into Quay.io through docker
+
+```bash
+ docker login -u <your-quay-username> quay.io
+```
 
 ## Register the Operator CRD 
 
@@ -33,8 +39,7 @@ make run ENABLE_WEBHOOKS=false
 **Build and Push Image**
 
 ```bash
-export USERNAME=<quay-username>
-export IMG=quay.io/<username>/golang-overeasy-operator:v1.0.1
+export IMG=quay.io/<username>/overeasy-operator:1.0.1
 
 make docker-build 
 make docker-push
@@ -42,17 +47,15 @@ make docker-push
 
 **Deploy the Operator**
 
-To deploy to `golang-operator-overeasy-system` namespace: 
+To deploy to `operator-overeasy-system` namespace: 
 
 ```bash
-cd config/default/ && kustomize edit set namespace "golang-operator-overeasy-system" && cd ../..
-
 make deploy
 ```
-At this point to see if your operator is installed switch your kubernetes namespace to: `golang-operator-overeasy-system`
+At this point to see if your operator is installed switch your kubernetes namespace to: `operator-overeasy-system`
 
 ```bash
-oc project golang-operator-overeasy-system
+oc project operator-overeasy-system
 oc get all
 ```
 
@@ -60,16 +63,16 @@ you should have similar output:
 
 ```code
 NAME                                                                READY   STATUS      RESTARTS   AGE
-pod/golang-operator-overeasy-controller-manager-5dd865759c-fwfpg   2/2     Running     2          15h
+pod/operator-overeasy-controller-manager-5dd865759c-fwfpg   2/2     Running     2          15h
 
 NAME                                                                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/golang-operator-overeasy-controller-manager-metrics-service   ClusterIP   10.43.185.51   <none>        8443/TCP   15h
+service/operator-overeasy-controller-manager-metrics-service   ClusterIP   10.43.185.51   <none>        8443/TCP   15h
 
 NAME                                                           READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/golang-operator-overeasy-controller-manager   1/1     1            1           15h
+deployment.apps/operator-overeasy-controller-manager   1/1     1            1           15h
 
 NAME                                                                      DESIRED   CURRENT   READY   AGE
-replicaset.apps/golang-operator-overeasy-controller-manager-5dd865759c   1         1         1       15h
+replicaset.apps/operator-overeasy-controller-manager-5dd865759c   1         1         1       15h
 
 ```
 
@@ -86,3 +89,9 @@ oc create -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml
 - [ ] - The busybox pod will complete after a duration
 - [ ] - After the busybox pod completes, the CR will have a `timeout` and `logged` flag set to `true`
 
+
+## Undeploy the Operator
+
+```bash
+make undeploy
+```

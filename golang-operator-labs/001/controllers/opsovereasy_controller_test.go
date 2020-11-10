@@ -2,9 +2,10 @@ package controllers
 
 import (
 	"bytes"
+	"io"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"io"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/util/uuid"
@@ -211,7 +212,7 @@ var _ = Describe("CR Controller", func() {
 					err = k8sClient.Get(testCtx, crKey, crdInstance)
 					Expect(err).NotTo(HaveOccurred())
 
-					Expect(crdInstance.Spec.Timeout).Should(Equal(int32(5)))
+					Expect(crdInstance.Spec.Timeout).Should(Equal(int32(25)))
 					Expect(crdInstance.Spec.Message).Should(Equal("domain specific operational knowledge is king"))
 				})
 			})
