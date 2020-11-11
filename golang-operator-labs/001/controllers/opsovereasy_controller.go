@@ -21,11 +21,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"net/http"
+
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
-	"net/http"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	"github.com/go-logr/logr"
@@ -92,6 +93,7 @@ func getSampleRestAPIResponse() *ApiSampleResponse {
 }
 
 // +kubebuilder:rbac:groups=operators-over-ez.mydomain.com,resources=opsovereasies,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=operators-over-ez.mydomain.com,resources=opsovereasies/finalizers,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=operators-over-ez.mydomain.com,resources=opsovereasies/status,verbs=get;update;patch
 // +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=core,resources=pods,verbs=get;list;watch;create;update;patch;delete

@@ -2,6 +2,7 @@
 
 - Install [operator sdk](https://sdk.operatorframework.io/docs/installation/install-operator-sdk/)
 - Install [ansible operator dependencies](https://sdk.operatorframework.io/docs/building-operators/ansible/installation/)
+- Install [kustomize](https://kubernetes-sigs.github.io/kustomize/installation/)
 - Install `make` - build uitlity
 
 # Quickstart
@@ -27,6 +28,12 @@
 make install
 ```
 
+## (Option 0) Run only the Playbook
+
+```bash
+ansible-playbook playbook.yml
+```
+
 ## (Option 1) Run locally outside the cluster
 
 ```bash
@@ -40,10 +47,12 @@ make run
 ```bash
 export IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
 
-make docker-build docker-push IMG=quay.io/<username>/ansible-overeasy-operator:1.0.1
+make docker-build docker-push
 ```
 
 **Deploy the Operator**
+
+To deploy to `ansible-operator-overeasy-system` namespace:
 
 ```bash
 make deploy

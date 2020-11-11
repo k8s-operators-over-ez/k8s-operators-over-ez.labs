@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: quay.io/kelee/overeasy-operator
-  newTag: 1.0.1
+  newTag: 1.0.2

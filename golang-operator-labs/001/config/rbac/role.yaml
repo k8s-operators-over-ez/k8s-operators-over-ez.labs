@@ -45,6 +45,18 @@ rules:
 - apiGroups:
   - operators-over-ez.mydomain.com
   resources:
+  - opsovereasies/finalizers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - operators-over-ez.mydomain.com
+  resources:
   - opsovereasies/status
   verbs:
   - get
