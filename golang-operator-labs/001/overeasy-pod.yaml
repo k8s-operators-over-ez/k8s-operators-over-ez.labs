@@ -13,6 +13,13 @@ spec:
     - sleep 15; echo "hello world"
     image: busybox
     name: busybox
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo 'Hello from the postStart handler'"]
+      preStop:
+        exec:
+          command: ["/bin/sh","-c","echo 'Hello from the preStop handler'"]
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
