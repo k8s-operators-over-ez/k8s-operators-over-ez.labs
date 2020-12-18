@@ -10,7 +10,7 @@ metadata:
   annotations:
     # This is what defines this resource as a hook. Without this line, the
     # job is considered part of the release.
-        # "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-weight": "-5"
     "helm.sh/hook": post-install
     "helm.sh/hook-delete-policy": hook-succeeded
 spec:
@@ -30,8 +30,8 @@ spec:
       serviceAccountName: internal-kubectl
       containers:
       - name: post-install-job
-        image: "quay.io/kelee/kubectl-container:0.1.0"
-        command: ["/bin/bash","-c", "source /tmp/test.sh && sleep 120"]
+        image: "quay.io/kelee/kubectl-container:0.1.1"
+        command: ["/bin/bash","-c", "source /tmp/reconcile.sh"]
         volumeMounts:
         - mountPath: "/tmp"
           name: task-pv-storage
