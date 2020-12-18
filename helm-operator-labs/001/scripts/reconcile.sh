@@ -14,7 +14,7 @@ kind: Pod
 metadata:
   annotations:
     meta.helm.sh/release-name: helmopsovereasy-sample
-    meta.helm.sh/release-namespace: workspace-00
+    meta.helm.sh/release-namespace: workspace-002
   creationTimestamp: null
   labels:
     app.kubernetes.io/managed-by: Helm
@@ -36,4 +36,4 @@ EOF
 
 sleep $((TIMEOUT+2))
 
-kubectl patch  helmopsovereasies.example.com helmopsovereasy-sample --type=merge  --patch '{"spec":{"subresources":{"status":{"expired":true,"logged":true}}}}'
+kubectl patch helmopsovereasies.example.com helmopsovereasy-sample --type=merge --patch '{"spec":{"subresources":{"status":{"expired":true,"logged":true}}}}'
