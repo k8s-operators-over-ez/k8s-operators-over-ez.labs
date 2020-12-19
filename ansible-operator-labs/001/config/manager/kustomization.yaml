@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: quay.io/kelee/ansible-overeasy-operator
-  newTag: 1.0.59
+  newTag: 1.0.61
