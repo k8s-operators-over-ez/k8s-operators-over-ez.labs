@@ -19,7 +19,7 @@
 ## Login into Quay.io through docker
 
 ```bash
- docker login -u <your-quay-username> quay.io
+docker login -u <your-quay-username> quay.io
 ```
 
 ## Register the Operator CRD 
@@ -58,11 +58,10 @@ To deploy to `ansible-operator-overeasy-system` namespace:
 make deploy
 ```
 
-At this point to see if your operator is installed switch your kubernetes namespace to: `ansible-operator-overeasy-system`
+At this point to see if your operator is installed:
 
 ```bash
-oc project ansible-operator-overeasy-system
-oc get all
+kubectl -n ansible-operator-overeasy-system get all
 ```
 
 you should have similar output: 
@@ -84,7 +83,7 @@ replicaset.apps/ansible-operator-overeasy-controller-manager-5dd865759c   1     
 ## Create Operator CR Instance
 
 ```bash
-oc create -f config/samples/ansible-operators-over-ez_v1alpha1_ansibleopsovereasy.yaml
+kubectl create -f config/samples/ansible-operators-over-ez_v1alpha1_ansibleopsovereasy.yaml
 ```
 
 ## Validate Checklist

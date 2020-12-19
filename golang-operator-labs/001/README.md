@@ -19,7 +19,7 @@
 ## Login into Quay.io through docker
 
 ```bash
- docker login -u <your-quay-username> quay.io
+docker login -u <your-quay-username> quay.io
 ```
 
 ## Register the Operator CRD 
@@ -54,8 +54,8 @@ make deploy
 At this point to see if your operator is installed switch your kubernetes namespace to: `operator-overeasy-system`
 
 ```bash
-oc project operator-overeasy-system
-oc get all
+kubectl project operator-overeasy-system
+kubectl get all
 ```
 
 you should have similar output: 
@@ -78,7 +78,7 @@ replicaset.apps/operator-overeasy-controller-manager-5dd865759c   1         1   
 ## Create Operator CR Instance
 
 ```bash
-oc create -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml
+kubectl create -f config/samples/operators-over-ez_v1alpha1_opsovereasy.yaml
 ```
 
 ## Validate Checklist
