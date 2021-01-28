@@ -2,3 +2,7 @@ apiVersion: ansible-operators-over-ez.mydomain.com/v1alpha1
 kind: AnsibleOpsOverEasy
 metadata:
   name: ansibleopsovereasy-sample
+spec:
+  # Add fields here
+  timeout: 15
+  message: "hello world"
